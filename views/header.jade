@@ -1,0 +1,10 @@
+//- header
+header.navbar(role="banner")
+  .container-fluid
+    .navbar-header
+      a(href="/") 乐器商店
+    if id
+      .header-right.navbar-text.navbar-right
+        span #{id}
+        a(href='/logout').navbar-link 退出
+

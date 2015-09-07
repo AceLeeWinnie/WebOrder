@@ -6,7 +6,7 @@ Musical Instrument shopping system
 		1.浏览乐器产品名录
 		2.购买乐器
 		3.查看历史记录和商品详情页
-		
+
 		4.关系型数据库
 			产品信息：名称，价格，重量等
 			用户信息：用户id，密码，订单历史，物流信息（以及当前海运或空运的价格）
@@ -18,7 +18,7 @@ Musical Instrument shopping system
 		产品列表：乐器产品列表，可以选择进入详情页
 		购物车：用户想买的产品列表哦
 		订单历史：每个条目包含与购物车相同的信息以及下单时间，发货模式，总金额
-	
+
 	用例
 		登录：登录开始session
 			正常流程：
@@ -26,7 +26,7 @@ Musical Instrument shopping system
 				weborder验证密码，初始化空购物车，展示欢迎信息包括产品列表
 			非正常流程：
 				未知用户，密码错误，数据库没连上
-		
+
 		浏览产品列表：在售的乐器名单
 			正常：
 				登陆后展示
@@ -50,7 +50,7 @@ Musical Instrument shopping system
 			不正常：
 				数量为负或者不填要有提示
 				连不上数据库
-		
+
 		从购物车删除商品
 			正常：
 				用户选择要买的东西
@@ -71,7 +71,7 @@ Musical Instrument shopping system
 				购物车清零
 			不正常：
 				本来就是空的要提示
-		
+
 		提交订单：
 			正常：
 				到购物车页
@@ -108,3 +108,20 @@ Musical Instrument shopping system
 				清空购物车
 				删除购物车选项
 				展示登录页
+
+	url:
+		/ GET
+
+		/login POST
+
+		/productlist GET
+
+		/product/:id GET
+
+		/shoppingbasket GET
+		return layout
+
+		/orderhistory GET
+		userid
+
+		/logout GET

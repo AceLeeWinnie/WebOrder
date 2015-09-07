@@ -1,0 +1,19 @@
+//- 登录
+extends layout
+
+block content
+  .container-fluid
+    form.login-form(action='/',method='post')
+      p WebOrder
+      if err
+        .alert.alert-danger(role="alert")
+          span.glyphicon.glyphicon-remove
+          strong= err
+      label(for="username").sr-only 用户名
+      input(name='username',type='text',placeholder='用户名').form-control
+      label(for="password").sr-only 密码
+      input(name='password',type='password',placeholder='密码').form-control
+      button(type='submit').btn.btn-lg.btn-block.btn-primary 登&nbsp;&nbsp;&nbsp;录
+
+  script(src='/javascripts/lib/jquery-2.1.1.min.js')
+  script(src='/javascripts/index.js')
