@@ -10,9 +10,8 @@ var port = process.env.PORT || 3000;
 // 路由
 var index = require('./routes/index');
 var productlist = require('./routes/productlist');
-// var product = require('./routes/product');
-// var orderhistory = require('./routes/orderhistory');
-// var logout = require('./routes/logout');
+var orderhistory = require('./routes/orderhistory');
+var logout = require('./routes/logout');
 
 var app = express();
 
@@ -38,13 +37,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 // GET /productlist
 app.use('/productlist', productlist);
-// GET /product/:id
-// app.use('/product/:id', product);
 // GET /orderhistory
 // POST /orderhistory
-// app.use('/orderhistory', orderhistory);
+app.use('/orderhistory', orderhistory);
 // GET /logout
-// app.use('/logout', logout);
+app.use('/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
