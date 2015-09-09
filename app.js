@@ -11,6 +11,7 @@ var port = process.env.PORT || 3000;
 var index = require('./routes/index');
 var productlist = require('./routes/productlist');
 var orderhistory = require('./routes/orderhistory');
+var shoppingbasket = require('./routes/shoppingbasket');
 var logout = require('./routes/logout');
 
 var app = express();
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 // GET /productlist
 app.use('/productlist', productlist);
+app.use('/shoppingbasket', shoppingbasket);
 // GET /orderhistory
 // POST /orderhistory
 app.use('/orderhistory', orderhistory);

@@ -3,16 +3,88 @@
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }*/
 
-body p {
+/*body p {
   margin: 0;
   padding: 0;
 }
 
 a {
   color: #00B7FF;
+}*/
+
+body {
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 .login-form {
-  width: 500px;
-  margin: 100px auto;
+  width: 400px;
+  margin: 200px auto;
+}
+
+.login-form input {
+  height: 50px;
+  font-size: 20px;
+}
+
+.login-form input[name="username"] {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.login-form input[name="password"] {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.brand-title, .brand-title:link, .brand-title:visited, .brand-title:hover, .brand-title:active {
+  font-size: 20px;
+  color: #333;
+  text-decoration: none;
+}
+
+.usernail {
+  width: 50px;
+  height: 50px;
+}
+
+.thumbnail img {
+  border: 1px solid #ccc;
+}
+
+.price {
+  color: #CC3300;
+  font-size: 1.5em;
+}
+
+.weight {
+  margin-left: 4em;
+}
+
+.list-group {
+  overflow: scroll;
+}
+
+.list-group-item {
+  clear: both;
+  overflow: auto;
+}
+
+.list-group-checkbox {
+  float: left;
+  border: 1px solid blue;
+}
+
+.list-group-entry {
+  float: left;
+}
+
+.list-group-entry img {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border: 1px solid pink;
+}
+
+.list-group-caption span {
+  margin-right: 5em;
 }

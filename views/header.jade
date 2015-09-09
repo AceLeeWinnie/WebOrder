@@ -1,10 +1,19 @@
 //- header
-header.navbar(role="banner")
+header.navbar.navbar-default(role="banner")
   .container-fluid
     .navbar-header
-      a(href="/") 乐器商店
-    if id
-      .header-right.navbar-text.navbar-right
-        span #{id}
-        a(href='/logout').navbar-link 退出
+      a(href="/").brand-title
+        img(alt="Brand", src="/images/WebOrder_Brand.png")
+        | &nbsp;WebOrder
+    ul.nav.navbar-nav.navbar-right
+      li
+        img(src="/images/user.jpg").usernail
+      li.active
+        a(href="/productlist") 商品列表
+      li
+        a(href="/shoppingbasket") 购物篮
+      li
+        a(href="/orderhistory") 订单历史
+      li
+        a(href="/logout") 退出
 
