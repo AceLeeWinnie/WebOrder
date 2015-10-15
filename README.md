@@ -1,7 +1,4 @@
-# WebOrder
-Musical Instrument shopping system
-
-# 乐器购买商店
+乐器购买商店
 	功能
 		1.浏览乐器产品名录
 		2.购买乐器
@@ -21,13 +18,42 @@ Musical Instrument shopping system
 
 	用例
 		登录：登录开始session
+`			GET http://ip:port/login?name=XXXandpwd=XXX
+			0 匹配成功 1 用户名不存在 2 密码错误 3 数据库没连上
+                        返回：{status: 0, userid: 100000}
 			正常流程：
 				用户键入用户id和密码
+				添加userid
 				weborder验证密码，初始化空购物车，展示欢迎信息包括产品列表
 			非正常流程：
 				未知用户，密码错误，数据库没连上
 
+
 		浏览产品列表：在售的乐器名单
+			GET	http://ip:port/productlist
+			0 成功 1 商品不存在 2 数据库连接错误
+			JSON数据格式
+			var product = {status: 0, content: [{
+				 id: '10003’,
+				 description: '正品黑陶埙民族乐器八孔初学演奏埙送教材特价埙手工埙梨埙瓷’,
+				 price: 26.00,
+				 shippingweight: 50,
+                                 postfee: 10,
+				 productpicture: '/images/pipa.jpg’
+			 },…]
+			};
+			选取一个商品
+			0 成功 1 商品不存在 2 数据库连接错误
+			GET	http://ip:port/product?id=XXX
+			JSON数据格式
+			var product = {status: 0, content:{
+				 id: '10003’,
+				 description: '正品黑陶埙民族乐器八孔初学演奏埙送教材特价埙手工埙梨埙瓷’,
+				 price: '26.00’,
+				 shippingweight: '50g’,
+				 productpicture: '/images/pipa.jpg’
+				 postfee: 15.00
+		  }};
 			正常：
 				登陆后展示
 				用户选择一个商品查看
@@ -73,6 +99,19 @@ Musical Instrument shopping system
 				本来就是空的要提示
 
 		提交订单：
+			POST http://ip:host/orderlist
+			返回 0 成功 1 数据库错
+			var order = {
+  				          userid: 1000,
+					  				shippingmode: 空运/陆运,
+									  totalprice: 124.00,
+									  totalweight: 13,
+									  content:  [{
+											id: 10001,
+											num: 12,
+                      productprice: 180},… ]
+					 				}
+
 			正常：
 				到购物车页
 				更新总支出包括邮费和总重
@@ -87,6 +126,25 @@ Musical Instrument shopping system
 				连不上数据库
 
 		查看订单历史：
+			GET http://ip:host/orderlist?userid=XXX
+			0 成功 1 订单历史空 2 数据库错
+			var orderlist = { status: 0,
+						content: [ {orderid: 1000,
+										    time: 2015-09-13,
+											  shippingmode: 空运/陆运,
+											  totalprice: 10，
+											  totalweight: 183894,
+											  content:  [{
+												id: 10001,
+								        description:,
+								        price: ,
+								        productprice: ,
+								        postfee: ,
+												shippingweight: 12.5,
+												num: 12},..]
+											},… ]
+						}
+
 			正常：
 				商品列表
 				点击订单历史
@@ -107,21 +165,5 @@ Musical Instrument shopping system
 				点击Log out
 				清空购物车
 				删除购物车选项
+				删除userid
 				展示登录页
-
-	url:
-		/ GET
-
-		/login POST
-
-		/productlist GET
-
-		/product/:id GET
-
-		/shoppingbasket GET
-		return layout
-
-		/orderhistory GET
-		userid
-
-		/logout GET
