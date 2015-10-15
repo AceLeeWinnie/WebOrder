@@ -5,29 +5,41 @@ extends layout
 
 block content
   #productdetail.modal.fade(tabindex="-1", role="dialog")
-    .modal-dialog(role="document")
+    .modal-dialog.modal-md(role="document")
       .modal-content
         .modal-header
           button(type="button", data-dismiss="modal").close
-            span&times;
-          h4.modal-title 大提琴
-        .modal-body 我是body
+            span &times;
+          h4.modal-title 商品详情
+        .modal-body
+
   include header
   .container-fluid
     .row
       .col-md-12.productlist
-        - for (var i = 0, length = productlist.length, row = Math.ceil(length / 6); i < row; ++i)
-          .row
-            - for (var j = 0, k = i * 6; j < 6 && k < length; ++j, ++k)
-              .col-md-2
-                .thumbnail
-                  img(alt="#{productlist[k].id}", src="#{productlist[k].productpicture}", data-toggle="modal", data-target="#productdetail")
-                  .caption
-                    span.price ￥
-                      strong #{productlist[k].price}
-                    span.weight
-                      strong #{productlist[k].shippingweight}
-                    a(data-toggle="modal", data-target="#productdetail") #{productlist[k].description}
+        case productlist.status
+          when 0
+            if productlist.content && productlist.content.length !== 0
+              - for (var i = 1,l = productlist.content.length + 1; i < l; i+=6)
+                .row
+                  - for (var j = i - 1, k = 0; k < 6; ++j, ++k)
+                    .col-md-2
+                      .thumbnail
+                        img(data-pid="#{productlist.content[j].id}",alt="#{productlist.content[j].id}", src="#{productlist.content[j].productpicture}", data-toggle="modal", data-target="#productdetail")
+                        .caption
+                          span.price ￥
+                            strong #{productlist.content[j].price}
+                          span.weight
+                            strong #{productlist.content[j].shippingweight}
+                            | kg
+                          a.description(data-pid="#{productlist.content[j].id}",data-toggle="modal", data-target="#productdetail") #{productlist.content[j].description}
+            else
+              h3 没有商品
+          when 1
+            h3 没有商品
+          default
+            h3 数据库连接错误
 
-  script(src='/javascripts/lib/jquery-2.1.1.min.js')
+  script(src="/javascripts/lib/jquery-2.1.1.min.js")
   script(src="/javascripts/lib/bootstrap.min.js")
+  script(src="/javascripts/productlist.js")

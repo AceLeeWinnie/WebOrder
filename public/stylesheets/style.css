@@ -1,24 +1,17 @@
-/*body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}*/
-
-/*body p {
-  margin: 0;
-  padding: 0;
-}
-
-a {
-  color: #00B7FF;
-}*/
-
 body {
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding-top: 70px;
+}
+
+ul li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .login-form {
   width: 400px;
-  margin: 200px auto;
+  margin: 100px auto;
 }
 
 .login-form input {
@@ -48,6 +41,8 @@ body {
 }
 
 .thumbnail img {
+  width: 180px;
+  height: 180px;
   border: 1px solid #ccc;
 }
 
@@ -60,31 +55,87 @@ body {
   margin-left: 4em;
 }
 
-.list-group {
-  overflow: scroll;
+#productdetail {
+  position: absolute;
+}
+
+#productdetail img{
+  width: 300px;
+  height: 300px;
+  border: 1px solid #ccc;
+}
+
+#productdetail .detail{
+  position: absolute;
+  left: 340px;
+  top: 0px;
+}
+
+#productdetail .detail ul{
+  padding: 0px;
+  list-style: none;
+}
+
+#productdetail .detail ul li {
+  height: 40px;
+}
+
+.description {
+  display: -webkit-box;/*将对象作为弹性伸缩盒子模型显示*/
+  overflow: hidden;
+  -webkit-line-clamp: 3;/*限制在一个块元素中显示的文本行数*/
+  -webkit-box-orient: vertical;/*设置或检索伸缩盒对象的子元素排列方式*/
+  text-overflow: ellipsis;
+}
+
+.shoppingbasket {
+  width: 1000px;
+  /*height: 1000px;*/
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px 1px rgba(0,0,0,.6);
+  margin-bottom: 70px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-center {
+  margin: 0 auto;
 }
 
 .list-group-item {
-  clear: both;
-  overflow: auto;
+  background-color: #FCFCFC;
 }
 
-.list-group-checkbox {
+/*.tr {
+  border: 1px solid #FFF;
+}
+
+.td {
   float: left;
-  border: 1px solid blue;
-}
+  border: 1px solid red;
+}*/
 
-.list-group-entry {
-  float: left;
-}
-
-.list-group-entry img {
+.basketnail {
   width: 80px;
   height: 80px;
-  overflow: hidden;
-  border: 1px solid pink;
 }
 
-.list-group-caption span {
-  margin-right: 5em;
+.orderlist {
+  width: 1000px;
+  padding: 10px;
 }
+
+.table-outerborder {
+  border: 1px solid #ccc;
+}
+
+/*.cl, .clearfix {
+  *zoom:1
+}
+
+.cl:after, .clearfix:after {
+  content:'\0020';
+  display:block;
+  height:0;
+  clear:both
+}*/

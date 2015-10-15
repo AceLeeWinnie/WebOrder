@@ -3,11 +3,9 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function (req, res) {
-  // 显示购物篮页
-  res.render('shoppingbasket');
+  res.render('shoppingbasket', {page:'shoppingbasket', title: '购物篮'});
 });
 
 
 module.exports = router;
-
 

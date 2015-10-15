@@ -3,4 +3,50 @@ extends layout
 
 block content
   include header
-  h1 OrderHistory
+
+  .container-fluid
+    .orderlist.center-block
+      case orderlist.status
+        when 0
+          - var orders = orderlist.content;
+          - var l = orders.length;
+          if orders !== null && orders !== undefined && l !== 0
+            each order in orders
+              table.table.table-outerborder
+                caption
+                  ul.list-inline
+                    li #{order.time}
+                    li 订单号: #{order.orderid}
+                    li 总价(元): #{order.totalprice}
+                    li 总重(kg): #{order.totalweight}
+                    li 邮寄方式: #{order.shippingmode}
+                thead
+                  tr
+                    td 图片
+                    td 商品信息
+                    td 单价(元)
+                    td 数量
+                    td 重量(kg)
+                    td 邮费(元)
+                    td 金额(元)
+                tbody
+                  each pro in order.content
+                    tr
+                      td
+                        img(src="#{pro.productpicture}").basketnail
+                      td
+                        p #{pro.description}
+                      td #{pro.price}
+                      td #{pro.num}
+                      td #{pro.shippingweight}
+                      td #{pro.postfee}
+                      td #{pro.price * pro.num + (pro.postfee - 0)}
+          else
+            h3 没有历史订单
+        when 1
+          h3 没有历史订单
+        default
+          h3 数据库错误
+
+  script(src="/javascripts/lib/jquery-2.1.1.min.js")
+  script(src="/javascripts/lib/bootstrap.min.js")

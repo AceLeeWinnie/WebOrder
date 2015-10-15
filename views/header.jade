@@ -1,5 +1,5 @@
 //- header
-header.navbar.navbar-default(role="banner")
+header.navbar.navbar-default.navbar-fixed-top(role="banner")
   .container-fluid
     .navbar-header
       a(href="/").brand-title
@@ -8,12 +8,24 @@ header.navbar.navbar-default(role="banner")
     ul.nav.navbar-nav.navbar-right
       li
         img(src="/images/user.jpg").usernail
-      li.active
-        a(href="/productlist") 商品列表
-      li
-        a(href="/shoppingbasket") 购物篮
-      li
-        a(href="/orderhistory") 订单历史
+      if page==='productlist'
+        li.active
+          a(href="/productlist") 商品列表
+      else
+        li
+          a(href="/productlist") 商品列表
+      if page==='shoppingbasket'
+        li.active
+          a(href="/shoppingbasket") 购物篮
+      else
+        li
+          a(href="/shoppingbasket") 购物篮
+      if page==='orderhistory'
+        li.active
+          a(href="/orderhistory") 订单历史
+      else
+        li
+          a(href="/orderhistory") 订单历史
       li
         a(href="/logout") 退出
 

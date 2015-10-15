@@ -10,6 +10,7 @@ var port = process.env.PORT || 3000;
 // 路由
 var index = require('./routes/index');
 var productlist = require('./routes/productlist');
+var product = require('./routes/product');
 var orderhistory = require('./routes/orderhistory');
 var shoppingbasket = require('./routes/shoppingbasket');
 var logout = require('./routes/logout');
@@ -24,7 +25,7 @@ app.set('view engine', 'jade');
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 // 静态资源
@@ -32,12 +33,38 @@ app.use(cookieParser());
 // GET /style.css
 // GET /favicon.ico
 app.use(express.static(path.join(__dirname, 'public')));
+
+// 挂载请求函数
+// app.use(function requestTosql (req, res, next) {
+//   req.requestTosql = function (options, cb) {
+//     var req = http.request(options, function (res) {
+//       res.setEncoding('utf8');
+//       res.on('data', function (chunk) {
+//         cb(null, chunk);
+//       });
+//       res.on('error', function (e) {
+//         cb(e);
+//       });
+//     });
+//     req.end();
+//   };
+//   next();
+// });
 // 路由
 // GET /
 // POST /
 app.use('/', index);
+// 判断是否有userid
+app.use(function (req, res, next){
+  if (!req.cookies.userid) {
+    res.redirect('/');
+  }
+  // console.log('userid:'+req.cookies.userid);
+  next();
+});
 // GET /productlist
 app.use('/productlist', productlist);
+app.use('/product', product);
 app.use('/shoppingbasket', shoppingbasket);
 // GET /orderhistory
 // POST /orderhistory
