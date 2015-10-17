@@ -3,7 +3,8 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function (req, res) {
-  res.render('shoppingbasket', {page:'shoppingbasket', title: '购物篮'});
+  console.log(req.cookies.userid);
+  res.render('shoppingbasket', {page:'shoppingbasket', title: '购物篮', userid: req.cookies.userid});
 });
 
 

@@ -59,7 +59,6 @@ app.use(function (req, res, next){
   if (!req.cookies.userid) {
     res.redirect('/');
   }
-  // console.log('userid:'+req.cookies.userid);
   next();
 });
 // GET /productlist

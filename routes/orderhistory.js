@@ -11,10 +11,8 @@ var querystring = require('querystring');
  *      [cb] 传递完成后的回调
  */
 var requestTosql =  function (options, cb) {
-  console.log('orderhistory requestTosql');
   var data = '';
   var req = http.request(options.config, function (res) {
-    console.log('orderhistory requestTosql return');
     res.setEncoding('utf8');
     res.on('data', function (chunk) {
       data += chunk;
@@ -56,8 +54,7 @@ router.get('/', function (req, res) {
       console.err('getorderlist error: '+err);
     } else {
       data = JSON.parse(data);
-      // console.log(data.content[0].content);
-      res.render('orderhistory', {page: 'orderhistory',title: '订单历史', orderlist: data});
+      res.render('orderhistory', {page: 'orderhistory',userid: req.cookies.userid, title: '订单历史', orderlist: data});
     }
   });
 });

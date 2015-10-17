@@ -40,6 +40,10 @@ ul li {
   height: 50px;
 }
 
+.thumbnail {
+  height: 300px;
+}
+
 .thumbnail img {
   width: 180px;
   height: 180px;
@@ -51,9 +55,9 @@ ul li {
   font-size: 1.5em;
 }
 
-.weight {
-  margin-left: 4em;
-}
+/*.weight {
+  margin-right: 0em;
+}*/
 
 #productdetail {
   position: absolute;
@@ -106,15 +110,6 @@ ul li {
   background-color: #FCFCFC;
 }
 
-/*.tr {
-  border: 1px solid #FFF;
-}
-
-.td {
-  float: left;
-  border: 1px solid red;
-}*/
-
 .basketnail {
   width: 80px;
   height: 80px;
@@ -125,17 +120,11 @@ ul li {
   padding: 10px;
 }
 
+.orderlist thead, .orderlist tbody {
+  display: none;
+}
+
 .table-outerborder {
   border: 1px solid #ccc;
 }
 
-/*.cl, .clearfix {
-  *zoom:1
-}
-
-.cl:after, .clearfix:after {
-  content:'\0020';
-  display:block;
-  height:0;
-  clear:both
-}*/

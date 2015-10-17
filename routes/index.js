@@ -9,9 +9,7 @@ var http = require('http');
  * GET http://WebOrderBack:8888/login?name=XXXandpwd=XXX
  */
  var requestTosql = function (options, cb) {
-   console.log('index requestTosql');
    var req = http.request(options, function (res) {
-     console.log('index requestTosql return res');
      var data = '';
      res.setEncoding('utf8');
      res.on('data', function (chunk) {
@@ -60,7 +58,6 @@ router.post('/', function (req, res, next) {
       } else {
         // 0 匹配成功 1 用户名不存在 2 密码错误 3 数据库没连上
         // {status: 0, userid: 10001}
-        console.log(data);
         data = JSON.parse(data);
         switch (data.status) {
           case 0:
