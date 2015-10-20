@@ -38,6 +38,7 @@ router.get('/',function (req, res) {
       console.err(err);
     } else {
       data = JSON.parse(data);
+      console.log(data);
       res.render('productlist', {page:'productlist', title: '商品列表', userid: req.cookies.userid, productlist: data});
     }
   });

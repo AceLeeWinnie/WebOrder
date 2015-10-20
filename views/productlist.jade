@@ -22,7 +22,7 @@ block content
             if productlist.content && productlist.content.length !== 0
               - for (var i = 1,l = productlist.content.length + 1; i < l; i+=6)
                 .row
-                  - for (var j = i - 1, k = 0; k < 6; ++j, ++k)
+                  - for (var j = i - 1, k = 0; k < 6 && j < l - 1; ++j, ++k)
                     .col-md-2
                       .thumbnail
                         img(data-pid="#{productlist.content[j].id}",alt="#{productlist.content[j].id}", src="#{productlist.content[j].productpicture}", data-toggle="modal", data-target="#productdetail")

@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
-  var totalprice = 0;
-  var totalweight = 0;
+  var totalprice = 0.00;
+  var totalweight = 0.00;
   /*
    *  showBasket 展示购物篮
    */
@@ -44,8 +44,10 @@ jQuery(document).ready(function ($) {
       $('#total-price').html(0.00);
       $('#total-weight').html(0.00);
     } else {
-      $('#total-price').html(totalprice += price);
-      $('#total-weight').html(totalweight += weight);
+      $('#total-price').html(totalprice = totalprice + (price.toFixed(2) - 0));
+      $('#total-weight').html(totalweight = totalweight + (weight.toFixed(2) - 0));
+      console.log(totalprice);
+      console.log(totalweight);
     }
   };
 

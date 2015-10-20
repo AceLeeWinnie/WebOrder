@@ -46,9 +46,9 @@ jQuery(document).ready(function ($) {
     var img = '<img src="'+data.productpicture+'" />';
     var h3 = '<h3>'+data.description+'</h3>';
     var ul = '<ul>';
-    ul += '<li><span>价格 ￥<strong class="price">'+data.price+'</strong></span></li>';
-    ul += '<li><span>邮费 ￥<strong>'+data.postfee+'</strong><span></li>';
-    ul += '<li><span>重量   <strong>'+data.shippingweight+'</strong>kg</span></li>';
+    ul += '<li><span>价格 ￥<strong class="price">'+data.price.toFixed(2)+'</strong></span></li>';
+    ul += '<li><span>邮费 ￥<strong>'+data.postfee.toFixed(2)+'</strong><span></li>';
+    ul += '<li><span>重量   <strong>'+data.shippingweight.toFixed(2)+'</strong>kg</span></li>';
     ul += '<li><span>数量  <span><input id="pro-number" type="number" min="0" placeholder="请选择商品数量" /></li>';
     ul += '<li><button id="add-basket-button">添加到购物篮</button></li></ul>';
     var detail = '<div class="detail">';
@@ -97,18 +97,6 @@ jQuery(document).ready(function ($) {
   };
   $('.productlist .thumbnail').on('click', 'img', productClickListener);
   $('.productlist .thumbnail').on('click', 'a', productClickListener);
-
-// sessionstorage结构如下
-// basket：
-// {
-//   10003：{
-//    name: '',
-//    weight: '',
-//    postfee: '',
-//    num: ''
-//   },
-//   1010：{}
-// }
 
   /*
    *  监听添加购物篮事件
