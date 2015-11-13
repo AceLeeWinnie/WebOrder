@@ -18,7 +18,7 @@
 
 	用例
 		登录：登录开始session
-`			GET http://ip:port/login?name=XXXandpwd=XXX
+`			GET	http://ip:port/login?name=XXXandpwd=XXX
 			0 匹配成功 1 用户名不存在 2 密码错误 3 数据库没连上
                         返回：{status: 0, userid: 100000}
 			正常流程：
