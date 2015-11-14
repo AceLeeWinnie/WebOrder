@@ -3,33 +3,31 @@
 var express = require('express');
 var router = express.Router();
 var http = require('http');
-var querystring = require('querystring');
 
 /*
  * 发起请求 requestTosql
  * 参数: [options] 向后台传递的订单数据或者
  *      [cb] 传递完成后的回调
  */
-var requestTosql =  function (options, cb) {
-  var data = '';
-  var req = http.request(options.config, function (res) {
-    res.setEncoding('utf8');
-    res.on('data', function (chunk) {
-      data += chunk;
-    });
-    res.on('end', function () {
-      cb(null, data);
-    });
-  });
-  req.on('error', function (e) {
-    cb(e);
-  });
-  if(options.data){
-    // console.log(JSON.stringify(options.data));
-    req.write(options.data);
-  }
-  req.end();
-};
+// var requestTosql =  function (options, cb) {
+//   var data = '';
+//   var req = http.request(options.config, function (res) {
+//     res.setEncoding('utf8');
+//     res.on('data', function (chunk) {
+//       data += chunk;
+//     });
+//     res.on('end', function () {
+//       cb(null, data);
+//     });
+//   });
+//   req.on('error', function (e) {
+//     cb(e);
+//   });
+//   if(options.data){
+//     req.write(options.data);
+//   }
+//   req.end();
+// };
 
 // TEST
 // var requestTosql = function (opts, cb) {
@@ -49,7 +47,7 @@ router.get('/', function (req, res) {
       method: 'GET'
     }
   };
-  requestTosql(options, function (err, data) {
+  req.requestTosql(options, function (err, data) {
     if (err) {
       console.err('getorderlist error: '+err);
     } else {
@@ -63,6 +61,7 @@ router.get('/', function (req, res) {
  * 提交订单
  */
 router.post('/', function (req, res) {
+  // console.log(req.body);
   var order = req.body.order || '';
   if (order) {
     var options = {
@@ -78,7 +77,7 @@ router.post('/', function (req, res) {
       data: order
     };
     // requestTosql(null, function (err, data) {
-    requestTosql(options, function (err, data) {
+    req.requestTosql(options, function (err, data) {
       if (err) {
         console.log('requestTosql error: ' + err.message);
       } else {

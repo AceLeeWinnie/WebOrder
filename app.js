@@ -27,6 +27,33 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(function (request, response, next) {
+  request.requestTosql = function (options, cb) {
+    // console.log('============> app requestTosql');
+    var req = http.request(options.config, function (res) {
+      var data = '';
+      res.setEncoding('utf8');
+      res.on('data', function (chunk) {
+        data += chunk;
+      });
+      res.on('end', function () {
+        cb(null, data);
+      });
+      res.on('error', function (e) {
+        cb(e);
+      });
+    });
+    req.on('error', function (e) {
+      cb(e);
+    });
+    if(options.data){
+      req.write(options.data);
+    }
+    req.end();
+  };
+  next();
+});
+
 app.use(cookieParser());
 // 静态资源
 // GET /javascripts/jquery.js
@@ -34,22 +61,6 @@ app.use(cookieParser());
 // GET /favicon.ico
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 挂载请求函数
-// app.use(function requestTosql (req, res, next) {
-//   req.requestTosql = function (options, cb) {
-//     var req = http.request(options, function (res) {
-//       res.setEncoding('utf8');
-//       res.on('data', function (chunk) {
-//         cb(null, chunk);
-//       });
-//       res.on('error', function (e) {
-//         cb(e);
-//       });
-//     });
-//     req.end();
-//   };
-//   next();
-// });
 // 路由
 // GET /
 // POST /
@@ -78,6 +89,8 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+
+
 // error handlers
 
 // development error handler
@@ -102,8 +115,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
+
 app.listen(port, function () {
   console.log('WebOrder listen on ' + port);
 });
+
 
 module.exports = app;
