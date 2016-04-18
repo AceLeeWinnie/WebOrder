@@ -1,22 +1,23 @@
-乐器购买商店
-	功能
-		1.浏览乐器产品名录
-		2.购买乐器
-		3.查看历史记录和商品详情页
+# 乐器购买商店
 
-		4.关系型数据库
-			产品信息：名称，价格，重量等
-			用户信息：用户id，密码，订单历史，物流信息（以及当前海运或空运的价格）
+## 功能
 
-	术语
-		用户： 用户名，id，密码
-		产品： 可以在线购买的乐器
-		产品信息： 乐器名称，单价，重量，说明，图片
-		产品列表：乐器产品列表，可以选择进入详情页
-		购物车：用户想买的产品列表哦
-		订单历史：每个条目包含与购物车相同的信息以及下单时间，发货模式，总金额
+	1. 浏览乐器产品名录
+	2. 购买乐器
+	3. 查看历史记录和商品详情页
+	4. 关系型数据库
+		* 产品信息：名称，价格，重量等
+		* 用户信息：用户id，密码，订单历史，物流信息（以及当前海运或空运的价格）
 
-	用例
+## 术语
+	* 用户： 用户名，id，密码
+	* 产品： 可以在线购买的乐器
+	* 产品信息： 乐器名称，单价，重量，说明，图片
+	* 产品列表：乐器产品列表，可以选择进入详情页
+	* 购物车：用户想买的产品列表哦
+	* 订单历史：每个条目包含与购物车相同的信息以及下单时间，发货模式，总金额
+
+## 用例
 		登录：登录开始session
 			GET	http://ip:port/login?name=XXXandpwd=XXX
 			0 匹配成功 1 用户名不存在 2 密码错误 3 数据库没连上
@@ -33,6 +34,7 @@
 			GET	http://ip:port/productlist
 			0 成功 1 商品不存在 2 数据库连接错误
 			JSON数据格式
+			```javascript
 			var product = {status: 0, content: [{
 				 id: '10003’,
 				 description: '正品黑陶埙民族乐器八孔初学演奏埙送教材特价埙手工埙梨埙瓷’,
@@ -42,18 +44,24 @@
 				 productpicture: '/images/pipa.jpg’
 			 },…]
 			};
+			```
 			选取一个商品
 			0 成功 1 商品不存在 2 数据库连接错误
 			GET	http://ip:port/product?id=XXX
 			JSON数据格式
-			var product = {status: 0, content:{
-				 id: '10003’,
-				 description: '正品黑陶埙民族乐器八孔初学演奏埙送教材特价埙手工埙梨埙瓷’,
-				 price: '26.00’,
-				 shippingweight: '50g’,
-				 productpicture: '/images/pipa.jpg’
-				 postfee: 15.00
-		  }};
+			```javascript
+			var product = {
+				status: 0, 
+				content:{
+					id: '10003’,
+					description: '正品黑陶埙民族乐器八孔初学演奏埙送教材特价埙手工埙梨埙瓷’,
+					price: '26.00’,
+					shippingweight: '50g’,
+					productpicture: '/images/pipa.jpg’
+					postfee: 15.00
+		    	}
+		    };
+		    ```
 			正常：
 				登陆后展示
 				用户选择一个商品查看
@@ -101,17 +109,19 @@
 		提交订单：
 			POST http://ip:host/orderlist
 			返回 0 成功 1 数据库错
+			```javascript
 			var order = {
-  				          userid: 1000,
-					  				shippingmode: 空运/陆运,
-									  totalprice: 124.00,
-									  totalweight: 13,
-									  content:  [{
-											id: 10001,
-											num: 12,
-                      productprice: 180},… ]
-					 				}
-
+  				userid: 1000,
+				shippingmode: 空运/陆运,
+				totalprice: 124.00,
+				totalweight: 13,
+				content:  [{
+					id: 10001,
+					num: 12,
+                    productprice: 180}
+                ,… ]
+			}
+			```
 			正常：
 				到购物车页
 				更新总支出包括邮费和总重
@@ -128,23 +138,26 @@
 		查看订单历史：
 			GET http://ip:host/orderlist?userid=XXX
 			0 成功 1 订单历史空 2 数据库错
-			var orderlist = { status: 0,
-						content: [ {orderid: 1000,
-										    time: 2015-09-13,
-											  shippingmode: 空运/陆运,
-											  totalprice: 10，
-											  totalweight: 183894,
-											  content:  [{
-												id: 10001,
-								        description:,
-								        price: ,
-								        productprice: ,
-								        postfee: ,
-												shippingweight: 12.5,
-												num: 12},..]
-											},… ]
-						}
-
+			```javascript
+			var orderlist = { 
+				status: 0,
+				content: [{
+					orderid: 1000,
+					time: '2015-09-13',
+					shippingmode: '空运', //空运，陆运
+					totalprice: 10，
+					totalweight: 183894,
+					content:  [{
+						id: 10001,
+						description: '',
+						price: 12,
+						productprice: 123,
+						postfee: 12,
+						shippingweight: 12.5,
+						num: 12},..]
+				},… ]
+			}
+			```
 			正常：
 				商品列表
 				点击订单历史
